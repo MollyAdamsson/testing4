@@ -8,7 +8,8 @@ def start_game():
     player_attack = 10
     player_defense = 5
     player_inventory = []
-
+    # Create a list of items that can be picked up
+    items = ["sword","shield","potions","water","bread"]
     # Main game loop
     while True:
         # Display current location and available options
@@ -18,12 +19,16 @@ def start_game():
         print("3. Check inventory")
         print("4. Fight")
         print("5. Quit game")
-
         # Get player input and handle it
         choice = input("What would you like to do? ")
         if choice == "1":
             # Go north
-            pass
+            print("You went north")
+            # Randomly select an item from the list
+            item_found = random.choice(items)
+            print(f"You found a {item_found}!")
+            # Add the item to player's inventory
+            player_inventory.append(item_found)
         elif choice == "2":
             # Go south
             pass
