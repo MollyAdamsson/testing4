@@ -76,17 +76,15 @@ def start_game():
                 if player_health <= 0:
                     print("You died!")
                     break
-                elif choice == "5":
+        elif choice == "5":
             # Quit game
-                    print("Thank you for playing!")
+            print("Thank you for playing!")
             break
         else:
             # Invalid input
             print("Invalid choice. Please try again.")
-    if player_health <= 0:
-        print("Game Over!")
-    else:
-        print("You've won!")
+    # End of the game 
+    print("Game Over!")
 
 # Start the game
 start_game()
