@@ -10,14 +10,21 @@ def start_game():
         player_health = 75
         player_attack = 12
         player_defense = 6
-        player_inventory = [] 
+        player_inventory = ["A healing potion"]
+        print(f"Here is some valid information about your character: \n Health: {player_health}\n Attack: {player_attack}\n Defense: {player_defense}\n Inventory: {player_inventory}\n")
+        input("Press any key to enter the woods: ")
+    else:
+        print("Thanks for playing! Have a good day!")
+        return
     # Create a list of items that can be picked up
     items = ["sword","shield","potion","dagger","axe"]
 
     # Main game loop
-    item_count = 0
+    item_count = 1
     while True:
         # Display current location and available options
+        print("Choose wisely before you continue, what do you want to do?")
+        
         print("1. Fight enemy")
         print("2. Solve riddle")
         print("3. Check inventory")
@@ -59,6 +66,7 @@ def start_game():
                         print(f"You hit {enemy_name} for {player_damage} damage.")
                     else:
                         print(f"You missed {enemy_name}.")
+                    print(f"Your health is {player_health}")
                 elif player_choice == "2":
                     hit_chance = random.randint(1,10)
                     if hit_chance <= 4:
@@ -75,12 +83,25 @@ def start_game():
                 # Enemy turn
                 enemy_damage = enemy_attack - player_defense
                 player_health -= enemy_damage
-                print(f"{enemy_name} attacks you for {enemy_damage} damage.")
-                print(f"Your health is {player_health}.")
+                print(f"{enemy_name} hit you for {enemy_damage} damage.")
+                print(f"Your health is now {player_health}")
                 if player_health <= 0:
-                    print("You died!")
+                    print("You've been killed. Game over.")
+                    if 'potion' in player_inventory:
+                            choice = input("You have a healing potion in your inventory. Would you like to drink it? Type 'yes' or 'no': ")
+                    if choice == 'yes':
+                            player_health = 75
+                            player_inventory.remove('potion')
+                            print("You have been resurrected and your health has been restored.")
+                            continue
+                    else:
+                            print("Thanks for playing! Have a good day!")
+                    return
+                else:
+                        print("Thanks for playing! Have a good day!")
+                        return
                 # Exit the fight loop once one
-                    break
+                
         elif choice == "2":
             # Solve riddle
             riddle = "The riddle is: What starts with an E, ends with an E, but only contains one letter?"
@@ -126,8 +147,5 @@ def start_game():
         start_game()
     else:
         print("Thanks for playing! See you next time.")
-        
-
 # Start the game
 start_game()
-
