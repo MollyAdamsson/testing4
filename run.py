@@ -13,8 +13,8 @@ def start_game():
         player_inventory = [] 
     # Create a list of items that can be picked up
     items = ["sword","shield","potion","dagger","axe"]
-    # Main game loop
 
+    # Main game loop
     item_count = 0
     while True:
         # Display current location and available options
@@ -40,6 +40,7 @@ def start_game():
                 print("You need to collect at least 2 items before you can fight the enemy.")
                 continue
             # Fight enemy
+            print("Oh, no! You bumped into a nasty forest goblin, you must defeat it before you continue!")
             enemy_name = "The forest goblin"
             enemy_health = 35
             enemy_attack = 15
@@ -80,20 +81,23 @@ def start_game():
                     print("You died!")
                 # Exit the fight loop once one
                     break
-
         elif choice == "2":
             # Solve riddle
-            riddle = "What has keys but can't open locks?"
-            answer = input(f"Riddle: {riddle}\nAnswer: ")
-            print("1. A janitor")
-            print("2. A keyboard")
-            print("3. A locksmith")
-            if answer.lower() == "2":
-                print("Correct! The chest is open! You found a treasure inside!")
-                # Add treasure to player's inventory
-                player_inventory.append("treasure")
+            riddle = "The riddle is: What starts with an E, ends with an E, but only contains one letter?"
+            print("You come across a treasure chest and a sign with a riddle written on it, to open the chest you must answer correctly! ")
+            print(riddle)
+            print("1. Elephant")
+            print("2. Envelope")
+            print("3. Eagle")
+            print("4. Edge")
+            player_answer = input("What is your answer? ")
+            if player_answer == "2":
+                print("Correct! The chest is open! You collect the treasure inside!")
+                riddle_solved = True
             else:
-                print("Wrong answer! Try again")
+                print("Incorrect. The answer is Envelope")
+            # Add treasure to player's inventory
+                player_inventory.append("treasure")
         elif choice == "3":
             # Check inventory
             if len(player_inventory) == 0:
@@ -122,6 +126,7 @@ def start_game():
         start_game()
     else:
         print("Thanks for playing! See you next time.")
+        
 
 # Start the game
 start_game()
