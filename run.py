@@ -14,6 +14,8 @@ def start_game():
     # Create a list of items that can be picked up
     items = ["sword","shield","potion","dagger","axe"]
     # Main game loop
+
+    item_count = 0
     while True:
         # Display current location and available options
         print("1. Fight enemy")
@@ -23,7 +25,20 @@ def start_game():
         print("5. Quit game")
         # Get player input and handle it
         choice = input("What would you like to do? ")
-        if choice == "1":
+        if choice == "4":
+            # Look for items
+            if random.randint(1,2) == 1:
+                item = random.choice(items)
+                player_inventory.append(item)
+                item_count += 1
+                print(f"You found a {item}! It has been added to your inventory.")
+            else:
+                print("You didn't find any items.")
+        elif choice == "1":
+            # Check if player has collected enough items
+            if item_count < 2:
+                print("You need to collect at least 2 items before you can fight the enemy.")
+                continue
             # Fight enemy
             enemy_name = "The forest goblin"
             enemy_health = 35
@@ -63,9 +78,9 @@ def start_game():
                 print(f"Your health is {player_health}.")
                 if player_health <= 0:
                     print("You died!")
+                # Exit the fight loop once one
                     break
-            # Exit the fight loop once one of the sides dies
-            break
+
         elif choice == "2":
             # Solve riddle
             riddle = "What has keys but can't open locks?"
@@ -102,7 +117,11 @@ def start_game():
             # Invalid input
             print("Invalid choice. Please try again.")
     # End of the game 
-    print("Game Over!")
+    play_again = input("Do you want to give it another try? (yes/no) ")
+    if play_again.lower() == "yes":
+        start_game()
+    else:
+        print("Thanks for playing! See you next time.")
 
 # Start the game
 start_game()
